@@ -47,7 +47,7 @@ export default class CarouselPager extends PureComponent {
     deltaDelay: PropTypes.number,
     children: PropTypes.array.isRequired,
     onPanResponderGrant: PropTypes.func,
-    onPanMoveStart: PropTypes.func,
+    onPanMove: PropTypes.func,
     onPanResponderRelease: PropTypes.func,
     onPanResponderTerminate: PropTypes.func,
   }
@@ -63,7 +63,7 @@ export default class CarouselPager extends PureComponent {
     deltaDelay: 0,
     onPageChange: NOOP,
     onPanResponderGrant: NOOP,
-    onPanMoveStart: NOOP,
+    onPanMove: NOOP,
     onPanResponderRelease: NOOP,
     onPanResponderTerminate: NOOP,
   }
@@ -220,7 +220,7 @@ export default class CarouselPager extends PureComponent {
           (offset < 0)
           || (offset > 0)
         ) {
-          this.props.onPanMoveStart(offset)
+          this.props.onPanMove(offset)
         }
         // End my changes
       },
