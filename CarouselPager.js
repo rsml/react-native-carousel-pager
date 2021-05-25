@@ -217,10 +217,10 @@ export default class CarouselPager extends PureComponent {
         // Start my changes
         const offset = gestureState['d' + suffix]
         if(
-          (offset < -15 && offset > -30)
-          || (offset > 15 && offset < 30)
+          (offset < 0)
+          || (offset > 0)
         ) {
-          this.props.onPanMoveStart()
+          this.props.onPanMoveStart(offset)
         }
         // End my changes
       },
