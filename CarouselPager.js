@@ -47,6 +47,7 @@ export default class CarouselPager extends PureComponent {
     deltaDelay: PropTypes.number,
     children: PropTypes.array.isRequired,
     onPanResponderGrant: PropTypes.func,
+    onPanMoveStart: PropTypes.func,
     onPanResponderRelease: PropTypes.func,
     onPanResponderTerminate: PropTypes.func,
   }
@@ -62,6 +63,7 @@ export default class CarouselPager extends PureComponent {
     deltaDelay: 0,
     onPageChange: NOOP,
     onPanResponderGrant: NOOP,
+    onPanMoveStart: NOOP,
     onPanResponderRelease: NOOP,
     onPanResponderTerminate: NOOP,
   }
@@ -211,6 +213,16 @@ export default class CarouselPager extends PureComponent {
       onPanResponderMove: (evt, gestureState) => {
         let suffix = this.props.vertical ? 'y' : 'x';
         this.state.pos.setValue(this._lastPos + gestureState['d' + suffix]);
+
+        // Start my changes
+        const offset = gestureState['d' + suffix]
+        if(
+          (offset < -15 && offset > -30)
+          || (offset > 15 && offset < 30)
+        ) {
+          this.props.onPanMoveStart()
+        }
+        // End my changes
       },
       onPanResponderTerminationRequest: (evt, gestureState) => true,
       onPanResponderRelease: (evt, gestureState) => {
